@@ -538,9 +538,9 @@
                 id: 1,
                 name: '序数花园',
                 title: '序数花园&沉浸式空间',
-                cover: '作品集png/03-交互设计/4.png',
-                video: 'sp/序数花园.mp4',
-                video2: 'sp/生成.mp4',
+                cover: 'png/03jh/4.png',
+                video: 'BV1xLVm6yE7y',
+                video2: 'BV1t3Vm67EY8',
                 type: 'interaction',
                 tags: ['交互设计', '斐波那契', '数字艺术', '植物美学'],
                 awards: ['米兰设计周-中国高校设计学科师生优秀作品展一等奖'],
@@ -560,8 +560,8 @@
                 id: 2,
                 name: '狸塔塔',
                 title: '狸塔塔 - 深技大数字人IP',
-                cover: '作品集png/04-IP设计/狸塔塔/9.png',
-                video: 'sp/狸塔塔.mp4',
+                cover: 'png/04ip/litata/9.png',
+                video: 'BV1t3Vm67ERs',
                 type: 'ip',
                 tags: ['IP设计', '数字人', '品牌形象', '深圳'],
                 concept: `
@@ -578,9 +578,9 @@
                 id: 3,
                 name: '好梦',
                 title: '好梦 - 疗愈系助眠应用',
-                cover: '作品集png/05-UI设计/13.png',
-                video: 'sp/momo.mp4',
-                video2: 'sp/生成.mp4',
+                cover: 'png/05ui/13.png',
+                video: 'BV1U3Vm67EGk',
+                video2: 'BV1t3Vm67EY8',
                 type: 'ui',
                 tags: ['UI设计', '助眠APP', '情感设计', '梦貘'],
                 concept: `
@@ -597,8 +597,8 @@
                 id: 4,
                 name: '蜷白',
                 title: '蜷白 - 可穿戴装置',
-                cover: '作品集png/06-装置设计/装置 (1).png',
-                video: 'sp/蜷白.mp4',
+                cover: 'png/06zz/1.png',
+                video: 'BV1t3Vm67E9u',
                 type: 'installation',
                 tags: ['可穿戴装置', '交互艺术', '情绪可视化', '含羞草'],
                 concept: `
@@ -615,7 +615,7 @@
                 id: 5,
                 name: '酥芙芙契茶屋',
                 title: '酥芙芙契茶屋 - 快闪店IP设计',
-                cover: '作品集png/04-IP设计/Sofufu/1.png',
+                cover: 'png/04ip/Sofufu/1.png',
                 type: 'ip',
                 tags: ['原创IP', '手绘', '展陈空间设计'],
                 concept: `
@@ -666,9 +666,7 @@
             const videoContainer1 = document.getElementById('video-container-1');
             if (project.video) {
                 videoContainer1.innerHTML = `
-                    <video controls playsinline>
-                        <source src="${project.video}" type="video/mp4">
-                    </video>
+                    <iframe src="https://player.bilibili.com/player.html?bvid=${project.video}&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="400px"></iframe>
                 `;
             } else {
                 videoContainer1.innerHTML = `
@@ -685,9 +683,7 @@
             if (project.video2) {
                 secondVideoSection.style.display = 'block';
                 videoContainer2.innerHTML = `
-                    <video controls playsinline>
-                        <source src="${project.video2}" type="video/mp4">
-                    </video>
+                    <iframe src="https://player.bilibili.com/player.html?bvid=${project.video2}&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="400px"></iframe>
                 `;
             } else {
                 secondVideoSection.style.display = 'none';
