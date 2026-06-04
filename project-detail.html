@@ -139,12 +139,15 @@
             background: var(--color-grey-900);
             box-shadow: var(--shadow-lg);
             max-width: 100%;
+            aspect-ratio: 16 / 9;
         }
 
-        .video-container video {
+        .video-container video,
+        .video-container iframe {
             width: 100%;
-            height: auto;
+            height: 100%;
             display: block;
+            border: none;
         }
 
         .video-placeholder {
@@ -666,7 +669,7 @@
             const videoContainer1 = document.getElementById('video-container-1');
             if (project.video) {
                 videoContainer1.innerHTML = `
-                    <iframe src="https://player.bilibili.com/player.html?bvid=${project.video}&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="400px"></iframe>
+                    <iframe src="https://player.bilibili.com/player.html?bvid=${project.video}&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="100%"></iframe>
                 `;
             } else {
                 videoContainer1.innerHTML = `
