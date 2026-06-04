@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目详情 - Yeuni作品集</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 详情页专属样式 */
+        .detail-page {
+            padding: 120px 0 60px;
+        }
+
+        .detail-header {
+            margin-bottom: 60px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: white;
+            border: 1px solid var(--color-grey-200);
+            border-radius: var(--radius-md);
+            color: var(--color-grey-700);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 30px;
+        }
+
+        .back-btn:hover {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(126, 96, 200, 0.3);
+        }
+
+        .project-title-wrap {
+            text-align: center;
+        }
+
+        .detail-project-title {
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--color-grey-900);
+            margin-bottom: 16px;
+        }
+
+        .detail-meta-tags {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .detail-meta-tag {
+            padding: 6px 16px;
+            background: var(--color-grey-100);
+            border-radius: 20px;
+            font-size: 14px;
+            color: var(--color-grey-600);
+        }
+
+        /* 封面区域 */
+        .detail-cover-section {
+            margin-bottom: 80px;
+        }
+
+        .detail-cover {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .detail-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cover-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, transparent 50%);
+            display: flex;
+            align-items: flex-end;
+            padding: 30px;
+        }
+
+        .cover-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        /* 视频区域 */
+        .detail-video-section {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--color-grey-900);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .video-subtitle {
+            font-size: 14px;
+            color: var(--color-grey-500);
+            margin-bottom: 20px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: var(--color-primary);
+            border-radius: 2px;
+        }
+
+        .video-container {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: var(--color-grey-900);
+            box-shadow: var(--shadow-lg);
+            max-width: 100%;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .video-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            background: linear-gradient(135deg, var(--color-grey-800) 0%, var(--color-grey-900) 100%);
+        }
+
+        .video-placeholder i {
+            font-size: 48px;
+            color: rgba(255,255,255,0.3);
+        }
+
+        .video-placeholder p {
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+        }
+
+        /* 概念说明区域 */
+        .detail-concept-section {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .concept-content {
+            line-height: 1.8;
+            color: var(--color-grey-700);
+            font-size: 16px;
+        }
+
+        .concept-content h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-grey-900);
+            margin: 24px 0 12px;
+        }
+
+        .concept-content p {
+            margin-bottom: 16px;
+        }
+
+        /* 不同项目类型的footer主题色 - 更浅的色调 */
+        .footer-interaction {
+            background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 50%, #2d2d2d 100%);
+        }
+
+        .footer-ip {
+            background: linear-gradient(135deg, #a8e6cf 0%, #88d8b0 50%, #b5f5d4 100%);
+        }
+
+        .footer-ui {
+            background: linear-gradient(135deg, #e8d5ff 0%, #d4b8ff 50%, #f0e1ff 100%);
+        }
+
+        .footer-installation {
+            background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 50%, #2d2d2d 100%);
+        }
+
+        /* 好梦主题 - 淡紫色调背景与装饰 */
+        .theme-gooddream {
+            background: linear-gradient(180deg, #f5f0ff 0%, #fff5ff 50%, #fef9ff 100%);
+            min-height: 100vh;
+        }
+
+        .theme-gooddream .detail-cover-section,
+        .theme-gooddream .detail-video-section,
+        .theme-gooddream .detail-concept-section {
+            position: relative;
+        }
+
+        /* 月亮星星装饰 */
+        .dream-decoration {
+            position: fixed;
+            font-size: 20px;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .dream-moon {
+            top: 15%;
+            right: 8%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .dream-star1 {
+            top: 25%;
+            left: 10%;
+            animation: float 5s ease-in-out infinite 0.5s;
+        }
+
+        .dream-star2 {
+            top: 40%;
+            right: 15%;
+            animation: float 7s ease-in-out infinite 1s;
+        }
+
+        .dream-star3 {
+            top: 60%;
+            left: 15%;
+            animation: float 5.5s ease-in-out infinite 1.5s;
+        }
+
+        .dream-star4 {
+            top: 75%;
+            right: 10%;
+            animation: float 6.5s ease-in-out infinite 0.8s;
+        }
+
+        /* 狸塔塔主题 - 淡青色渐变背景 */
+        .theme-litata {
+            background: linear-gradient(180deg, #e8f8f5 0%, #f0fcf9 40%, #ffffff 100%);
+            min-height: 100vh;
+        }
+
+        /* 云朵装饰 */
+        .cloud-decoration {
+            position: fixed;
+            font-size: 28px;
+            opacity: 0.25;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .cloud1 {
+            top: 12%;
+            right: 5%;
+            animation: floatCloud 8s ease-in-out infinite;
+        }
+
+        .cloud2 {
+            top: 35%;
+            left: 3%;
+            animation: floatCloud 10s ease-in-out infinite 1.5s;
+        }
+
+        .cloud3 {
+            top: 55%;
+            right: 12%;
+            animation: floatCloud 9s ease-in-out infinite 2s;
+        }
+
+        .cloud4 {
+            top: 70%;
+            left: 8%;
+            animation: floatCloud 7.5s ease-in-out infinite 0.5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        @keyframes floatCloud {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-8px) translateX(5px); }
+        }
+
+        /* 深色footer文字颜色 */
+        .footer-interaction .footer-logo,
+        .footer-installation .footer-logo,
+        .footer-interaction .footer-contact-title,
+        .footer-installation .footer-contact-title,
+        .footer-interaction .footer-social-title,
+        .footer-installation .footer-social-title {
+            color: #ffffff;
+        }
+
+        .footer-interaction .footer-description,
+        .footer-installation .footer-description {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-interaction .contact-item,
+        .footer-installation .contact-item {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-interaction .footer-social-links a,
+        .footer-installation .footer-social-links a {
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .footer-interaction .footer-bottom,
+        .footer-installation .footer-bottom {
+            color: rgba(255, 255, 255, 0.6);
+            border-top-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* 浅色footer文字颜色 - 好梦和狸塔塔 */
+        .footer-ui .footer-logo,
+        .footer-ui .footer-contact-title,
+        .footer-ui .footer-social-title,
+        .footer-ip .footer-logo,
+        .footer-ip .footer-contact-title,
+        .footer-ip .footer-social-title {
+            color: #5a4a7a;
+        }
+
+        .footer-ui .footer-description,
+        .footer-ip .footer-description {
+            color: #7a6a8a;
+        }
+
+        .footer-ui .contact-item,
+        .footer-ip .contact-item {
+            color: #6a5a7a;
+        }
+
+        .footer-ui .footer-social-links a,
+        .footer-ip .footer-social-links a {
+            color: #5a4a7a;
+            border-color: rgba(90, 74, 122, 0.3);
+        }
+
+        .footer-ui .footer-bottom,
+        .footer-ip .footer-bottom {
+            color: #8a7a9a;
+            border-top-color: rgba(90, 74, 122, 0.1);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .detail-project-title {
+                font-size: 28px;
+            }
+
+            .detail-cover-section,
+            .detail-video-section {
+                margin-bottom: 40px;
+            }
+
+            .detail-concept-section {
+                padding: 24px;
+            }
+
+            .cover-overlay {
+                padding: 20px;
+            }
+
+            .cover-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="navbar">
+        <nav class="nav-container">
+            <a href="index.html" class="logo" aria-label="Yeuni">
+                <span class="logo-text">Yeuni</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#home">首页</a></li>
+                <li><a href="index.html#projects">项目</a></li>
+                <li><a href="index.html#about">关于</a></li>
+                <li><a href="index.html#contact">联系</a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="切换菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- 详情页面内容 -->
+    <main class="detail-page">
+        <div class="container">
+            <!-- 头部信息 -->
+            <div class="detail-header">
+                <a href="index.html#projects" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>返回项目列表</span>
+                </a>
+                <div class="project-title-wrap">
+                    <h1 class="detail-project-title" id="project-title">项目详情</h1>
+                    <div class="detail-meta-tags" id="project-tags">
+                    </div>
+                    <div class="detail-meta-awards" id="project-awards" style="display: none;">
+                        <span class="award-label">🏆 获奖</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 封面区域 -->
+            <section class="detail-cover-section">
+                <div class="detail-cover">
+                    <img id="cover-image" src="" alt="项目封面">
+                    <div class="cover-overlay">
+                        <h2 class="cover-title" id="cover-title">项目封面</h2>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 视频区域 -->
+            <section class="detail-video-section">
+                <div class="section-header">
+                    <h3 class="section-title" id="video-title">项目演示视频</h3>
+                    <p class="video-subtitle" id="video-subtitle">项目演示视频</p>
+                </div>
+                <div class="video-container" id="video-container-1">
+                    <div class="video-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                        <p>项目演示视频</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第二个视频区域 -->
+            <section class="detail-video-section" id="second-video-section" style="display: none;">
+                <div class="section-header">
+                    <h3 class="section-title">序数花园&音画互动</h3>
+                    <p class="video-subtitle">音画互动演示视频</p>
+                </div>
+                <div class="video-container" id="video-container-2">
+                    <div class="video-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                        <p>音画互动演示视频</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 概念说明区域 -->
+            <section class="detail-concept-section">
+                <h3 class="section-title">概念说明</h3>
+                <div class="concept-content" id="concept-content">
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-logo">Yeuni</span>
+                    <p class="footer-description">Creative Digital Experience</p>
+                </div>
+                <div class="footer-contact">
+                    <div class="footer-contact-title">Contact</div>
+                    <div class="contact-list">
+                        <a href="mailto:1186862543@qq.com" class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>1186862543@qq.com</span>
+                        </a>
+                        <a href="tel:+8615015179179" class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>15015179179</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-social">
+                    <div class="footer-social-title">Social</div>
+                    <div class="footer-social-links">
+                        <a href="#" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" aria-label="Behance">
+                            <i class="fab fa-behance"></i>
+                        </a>
+                        <a href="#" aria-label="Dribbble">
+                            <i class="fab fa-dribbble"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Yeuni. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 项目数据
+        const projects = {
+            '1': {
+                id: 1,
+                name: '序数花园',
+                title: '序数花园&沉浸式空间',
+                cover: '作品集png/03-交互设计/4.png',
+                video: 'sp/序数花园.mp4',
+                video2: 'sp/生成.mp4',
+                type: 'interaction',
+                tags: ['交互设计', '斐波那契', '数字艺术', '植物美学'],
+                awards: ['米兰设计周-中国高校设计学科师生优秀作品展一等奖'],
+                concept: `
+                    <p>《序数花园》是一件将植物与斐波那契理论相结合的交互艺术作品。通过数字媒介探索自然界的数学规律，创造出独特的视觉体验。</p>
+                    <h4>设计理念</h4>
+                    <p>本作品的核心概念是将数学的理性之美与植物生长的自然美学相融合。斐波那契数列在自然界中无处不在——从向日葵的种子排列到松果的鳞片分布，都遵循着这一数学规律。</p>
+                    <h4>技术实现</h4>
+                    <p>通过编程实现斐波那契螺旋的可视化，并结合植物生长算法，创造出动态生成的数字花园。用户可以通过交互操作影响植物的生长方向和形态，体验数学与艺术的奇妙交汇。</p>
+                    <h4>音画互动</h4>
+                    <p>实现完整的音画互动效果，植物图形随音乐产生粒子效果跳动，实时生成符合斐波那契原理生长规律的植物名称，确保音频与视觉元素同步响应。</p>
+                    <h4>创作意义</h4>
+                    <p>这件作品旨在揭示隐藏在自然背后的数学秩序，让观者在欣赏美的同时，感受到科学与艺术的内在联系。通过数字技术，我们重新诠释了传统园艺美学，赋予其新的时代意义。</p>
+                `
+            },
+            '2': {
+                id: 2,
+                name: '狸塔塔',
+                title: '狸塔塔 - 深技大数字人IP',
+                cover: '作品集png/04-IP设计/狸塔塔/9.png',
+                video: 'sp/狸塔塔.mp4',
+                type: 'ip',
+                tags: ['IP设计', '数字人', '品牌形象', '深圳'],
+                concept: `
+                    <p>"狸塔塔"是为深圳技术大学设计的数字人IP形象，融合了深圳的地域文化特色与现代设计理念。</p>
+                    <h4>设计灵感</h4>
+                    <p>IP形象的设计灵感来源于深圳的城市精神——创新、活力、包容。"狸"代表着机智与灵活，"塔"象征着深圳的地标建筑和不断向上的城市精神。</p>
+                    <h4>形象特点</h4>
+                    <p>狸塔塔以可爱的狐狸形象为基础，身着科技感十足的服装，体现了深圳技术大学的工科特色。配色方案采用了科技蓝与活力橙的搭配，展现年轻、时尚的品牌调性。</p>
+                    <h4>应用场景</h4>
+                    <p>该IP形象可应用于校园宣传、文创产品、数字互动等多个场景，成为学校对外展示的重要视觉符号。</p>
+                `
+            },
+            '3': {
+                id: 3,
+                name: '好梦',
+                title: '好梦 - 疗愈系助眠应用',
+                cover: '作品集png/05-UI设计/13.png',
+                video: 'sp/momo.mp4',
+                video2: 'sp/生成.mp4',
+                type: 'ui',
+                tags: ['UI设计', '助眠APP', '情感设计', '梦貘'],
+                concept: `
+                    <p>《好梦》是一款以梦貘为核心的疗愈系助眠应用，通过温暖的视觉设计和贴心的交互体验，帮助用户获得更好的睡眠质量。</p>
+                    <h4>设计概念</h4>
+                    <p>梦貘是中国古代神话中的神兽，传说它能够吞噬噩梦，带来好梦。以此为灵感，我们打造了一个充满故事感的助眠产品。</p>
+                    <h4>功能特色</h4>
+                    <p>应用包含多种助眠功能：白噪音播放、睡前故事、呼吸引导、睡眠记录等。整体视觉设计采用柔和的渐变色彩和圆润的造型，营造温暖舒适的氛围。</p>
+                    <h4>情感设计</h4>
+                    <p>通过拟人化的梦貘形象与用户互动，建立情感连接。梦貘会根据用户的睡眠状态呈现不同的表情和动作，让整个助眠过程变得更加生动有趣。</p>
+                `
+            },
+            '4': {
+                id: 4,
+                name: '蜷白',
+                title: '蜷白 - 可穿戴装置',
+                cover: '作品集png/06-装置设计/装置 (1).png',
+                video: 'sp/蜷白.mp4',
+                type: 'installation',
+                tags: ['可穿戴装置', '交互艺术', '情绪可视化', '含羞草'],
+                concept: `
+                    <p>"蜷白"是一件以含羞草的应激闭合特性为核心隐喻的可穿戴装置艺术作品，结合黑白圣母的意象，将植物的'触之即敛'化为人类情绪的可视化表达。</p>
+                    <h4>设计灵感</h4>
+                    <p>含羞草的应激闭合特性——当外界产生触碰与压力时，叶片会迅速收缩——这一自然现象成为本作品的核心隐喻。我们希望将植物的这种本能反应转化为人类情绪的可视化表达，让情绪变得可以被'看见'。</p>
+                    <h4>技术实现</h4>
+                    <p>装置采用智能材料与传感器技术，能够感知外界触碰与压力，并通过机械结构模拟植物叶片的收缩行为。当穿戴者感受到外界压力时，装置会从开放状态逐渐进入内放与防御状态，呈现出一种情绪被'看见'的过程。</p>
+                    <h4>艺术表达</h4>
+                    <p>黑白圣母的意象为作品增添了宗教与哲学的深度，象征着纯洁与守护。装置的形态变化不仅是机械运动，更是一种情感的流动与表达，让观者能够直观地感受到情绪的起伏与变化。</p>
+                `
+            },
+            '5': {
+                id: 5,
+                name: '酥芙芙契茶屋',
+                title: '酥芙芙契茶屋 - 快闪店IP设计',
+                cover: '作品集png/04-IP设计/Sofufu/1.png',
+                type: 'ip',
+                tags: ['原创IP', '手绘', '展陈空间设计'],
+                concept: `
+                    <p>"酥芙芙契茶屋"是为快闪店空间设计的原创IP形象项目，时间范围为2024年9月至2025年1月。</p>
+                    <h4>故事背景</h4>
+                    <p>由四位魔法师角色共同搭建的魔法契茶屋：狐狸店长福克斯、店员小熊小栗贝儿、小羊克尔顿、小兔瑞比特。他们通过制作魔法甜品来满足人们对美好生活的需求。</p>
+                    <h4>角色设定</h4>
+                    <p><strong>福克斯（狐狸店长）</strong>：睿智优雅的店长，擅长调配各种魔法茶饮，拥有丰富的甜品制作经验。</p>
+                    <p><strong>小栗贝儿（小熊店员）</strong>：可爱活泼的店员，负责接待客人和包装甜品，笑容温暖治愈。</p>
+                    <p><strong>克尔顿（小羊店员）</strong>：细心认真的店员，负责甜品装饰和摆盘设计，审美品味出众。</p>
+                    <p><strong>瑞比特（小兔店员）</strong>：机灵可爱的店员，负责创意研发新甜品，充满奇思妙想。</p>
+                    <h4>设计理念</h4>
+                    <p>整体设计采用温暖柔和的色调，融合手绘风格，营造出梦幻般的童话氛围。每个角色都有独特的个性和技能，共同打造一个充满魔法与美好的甜品世界。</p>
+                    <h4>应用场景</h4>
+                    <p>该IP形象可应用于快闪店空间设计、周边产品开发、宣传物料制作等多个场景，为品牌注入活力与创意。</p>
+                `
+            }
+        };
+
+        // 获取URL参数
+        function getParameterByName(name) {
+            const url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+            const results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        // 加载项目数据
+        document.addEventListener('DOMContentLoaded', function() {
+            const projectId = getParameterByName('id') || '1';
+            const project = projects[projectId] || projects['1'];
+
+            // 更新页面内容
+            document.getElementById('project-title').textContent = project.title;
+            document.getElementById('cover-image').src = project.cover;
+            document.getElementById('cover-image').alt = project.name + ' - 项目封面';
+            document.getElementById('cover-title').textContent = project.name;
+            document.getElementById('concept-content').innerHTML = project.concept;
+
+            // 更新视频标题
+            document.getElementById('video-title').textContent = project.title;
+            document.getElementById('video-subtitle').textContent = '项目演示视频';
+
+            // 加载视频
+            const videoContainer1 = document.getElementById('video-container-1');
+            if (project.video) {
+                videoContainer1.innerHTML = `
+                    <video controls playsinline>
+                        <source src="${project.video}" type="video/mp4">
+                    </video>
+                `;
+            } else {
+                videoContainer1.innerHTML = `
+                    <div class="video-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                        <p>项目演示视频</p>
+                    </div>
+                `;
+            }
+
+            // 加载第二个视频（仅序数花园项目）
+            const secondVideoSection = document.getElementById('second-video-section');
+            const videoContainer2 = document.getElementById('video-container-2');
+            if (project.video2) {
+                secondVideoSection.style.display = 'block';
+                videoContainer2.innerHTML = `
+                    <video controls playsinline>
+                        <source src="${project.video2}" type="video/mp4">
+                    </video>
+                `;
+            } else {
+                secondVideoSection.style.display = 'none';
+            }
+
+            // 更新标签
+            const tagsContainer = document.getElementById('project-tags');
+            project.tags.forEach(tag => {
+                const span = document.createElement('span');
+                span.className = 'detail-meta-tag';
+                span.textContent = tag;
+                tagsContainer.appendChild(span);
+            });
+
+            // 更新奖项
+            const awardsContainer = document.getElementById('project-awards');
+            if (project.awards && project.awards.length > 0) {
+                awardsContainer.style.display = 'block';
+                project.awards.forEach(award => {
+                    const span = document.createElement('span');
+                    span.className = 'detail-meta-award';
+                    span.textContent = award;
+                    awardsContainer.appendChild(span);
+                });
+            }
+
+            // 根据项目类型动态设置footer主题色
+            const footer = document.querySelector('.footer');
+            const footerClasses = ['footer-interaction', 'footer-ip', 'footer-ui', 'footer-installation'];
+            
+            // 移除所有footer主题类
+            footerClasses.forEach(cls => footer.classList.remove(cls));
+            
+            // 添加当前项目类型对应的类
+            if (project.type) {
+                const typeClass = `footer-${project.type}`;
+                if (footerClasses.includes(typeClass)) {
+                    footer.classList.add(typeClass);
+                }
+            }
+
+            // 根据项目类型添加主题类和装饰元素
+            const body = document.body;
+            
+            // 好梦主题 - 淡紫色调 + 月亮星星装饰
+            if (project.name === '好梦') {
+                body.classList.add('theme-gooddream');
+                
+                // 添加月亮星星装饰
+                const dreamDecorations = [
+                    { class: 'dream-decoration dream-moon', content: '🌙' },
+                    { class: 'dream-decoration dream-star1', content: '⭐' },
+                    { class: 'dream-decoration dream-star2', content: '✨' },
+                    { class: 'dream-decoration dream-star3', content: '⭐' },
+                    { class: 'dream-decoration dream-star4', content: '✨' }
+                ];
+                
+                dreamDecorations.forEach(deco => {
+                    const element = document.createElement('div');
+                    element.className = deco.class;
+                    element.textContent = deco.content;
+                    body.appendChild(element);
+                });
+            }
+            
+            // 狸塔塔主题 - 淡青色渐变 + 云朵装饰
+            if (project.name === '狸塔塔') {
+                body.classList.add('theme-litata');
+                
+                // 添加云朵装饰
+                const cloudDecorations = [
+                    { class: 'cloud-decoration cloud1', content: '☁️' },
+                    { class: 'cloud-decoration cloud2', content: '☁️' },
+                    { class: 'cloud-decoration cloud3', content: '☁️' },
+                    { class: 'cloud-decoration cloud4', content: '☁️' }
+                ];
+                
+                cloudDecorations.forEach(deco => {
+                    const element = document.createElement('div');
+                    element.className = deco.class;
+                    element.textContent = deco.content;
+                    body.appendChild(element);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>酥芙芙契茶屋 - 快闪店IP设计</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* 酥芙芙专属可爱风格样式 */
+        :root {
+            --macaron-pink: #FFB7C5;
+            --macaron-peach: #FFD4B8;
+            --macaron-yellow: #FFF3C4;
+            --macaron-mint: #C8F7DC;
+            --macaron-lavender: #E8D5FF;
+            --macaron-blue: #D4E8FF;
+            --polka-dot-color: rgba(255, 183, 197, 0.3);
+        }
+
+        body {
+            background-color: #FFF8F9;
+        }
+
+        /* 波点背景 */
+        .polka-dot-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, var(--polka-dot-color) 2px, transparent 2px);
+            background-size: 30px 30px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* 导航栏可爱样式 */
+        .navbar {
+            background: rgba(255, 248, 249, 0.95) !important;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 20px rgba(255, 183, 197, 0.2);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 248, 249, 0.98) !important;
+            box-shadow: 0 8px 30px rgba(255, 183, 197, 0.3);
+        }
+
+        .nav-links a {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--macaron-pink);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--macaron-pink), var(--macaron-peach));
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* 详情页样式 */
+        .detail-page {
+            padding: 120px 0 60px;
+            position: relative;
+        }
+
+        /* 返回按钮 */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--macaron-pink), var(--macaron-peach));
+            border: none;
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 183, 197, 0.4);
+            margin-bottom: 30px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(255, 183, 197, 0.5);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* 标题区域 */
+        .detail-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .detail-project-title {
+            font-size: 42px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FF6B8A, #FFB7C5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .detail-meta-tags {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .detail-meta-tag {
+            padding: 8px 20px;
+            background: linear-gradient(135deg, var(--macaron-yellow), var(--macaron-peach));
+            border-radius: 25px;
+            font-size: 14px;
+            color: #8B6A5C;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .detail-meta-tag:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 212, 184, 0.4);
+        }
+
+        /* 封面区域 */
+        .detail-cover-section {
+            margin-bottom: 80px;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .detail-cover {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            box-shadow: 0 20px 60px rgba(255, 183, 197, 0.3);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .detail-cover:hover {
+            transform: scale(1.02);
+            box-shadow: 0 30px 80px rgba(255, 183, 197, 0.4);
+        }
+
+        .detail-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .detail-cover:hover img {
+            transform: scale(1.1);
+        }
+
+        .cover-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 183, 197, 0.4) 0%, rgba(255, 212, 184, 0.2) 50%, transparent 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 40px;
+        }
+
+        .cover-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* 角色展示区域 */
+        .characters-section {
+            margin-bottom: 80px;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .section-title-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #FF6B8A, #FFB7C5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 28px;
+            background: linear-gradient(180deg, var(--macaron-pink), var(--macaron-peach));
+            border-radius: 2px;
+        }
+
+        .characters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .character-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(255, 183, 197, 0.15);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .character-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--macaron-lavender) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .character-card:hover::before {
+            opacity: 0.3;
+        }
+
+        .character-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(255, 183, 197, 0.3);
+        }
+
+        .character-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 16px;
+            background: linear-gradient(135deg, var(--macaron-pink), var(--macaron-yellow));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(255, 183, 197, 0.3);
+        }
+
+        .character-card:hover .character-icon {
+            transform: rotate(10deg) scale(1.1);
+            box-shadow: 0 12px 35px rgba(255, 183, 197, 0.4);
+        }
+
+        .character-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #4A4A4A;
+            margin-bottom: 8px;
+        }
+
+        .character-role {
+            font-size: 14px;
+            color: #FF8FA3;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .character-desc {
+            font-size: 13px;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        /* 概念说明区域 */
+        .detail-concept-section {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 12px 40px rgba(255, 183, 197, 0.15);
+            animation: fadeInUp 0.8s ease 0.8s both;
+        }
+
+        .concept-content {
+            line-height: 1.9;
+            color: #555;
+            font-size: 16px;
+            padding-left: 40px;
+        }
+
+        .concept-content h4 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #4A4A4A;
+            margin: 28px 0 16px;
+            position: relative;
+            padding-left: 28px;
+        }
+
+        .concept-content h4::before {
+            content: '🍰';
+            position: absolute;
+            left: 0;
+        }
+
+        .concept-content p {
+            margin-bottom: 18px;
+        }
+
+        .concept-content strong {
+            color: #FF6B8A;
+            font-weight: 600;
+        }
+
+        /* 装饰元素 - 调整位置避免遮挡内容 */
+        .floating-decoration {
+            position: fixed;
+            font-size: 24px;
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 100;
+            max-width: 30px;
+            max-height: 30px;
+        }
+
+        .deco-1 { top: 15%; right: 2%; animation: floatDeco 4s ease-in-out infinite; }
+        .deco-2 { top: 35%; left: 1%; animation: floatDeco 5s ease-in-out infinite 1s; }
+        .deco-3 { top: 55%; right: 1%; animation: floatDeco 6s ease-in-out infinite 0.5s; }
+        .deco-4 { top: 75%; left: 2%; animation: floatDeco 4.5s ease-in-out infinite 1.5s; }
+
+        /* 酥芙芙专属页脚样式 - 马卡龙色系 */
+        .footer {
+            background: linear-gradient(135deg, var(--macaron-pink) 0%, var(--macaron-peach) 50%, var(--macaron-yellow) 100%);
+            padding: 40px 0;
+            margin-top: 60px;
+            box-shadow: 0 -10px 40px rgba(255, 183, 197, 0.3);
+        }
+
+        .footer .footer-content {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        .footer .footer-brand {
+            text-align: left;
+        }
+
+        .footer .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            display: block;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer .footer-description {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .footer .footer-contact {
+            text-align: center;
+        }
+
+        .footer .footer-contact-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .footer .contact-item:hover {
+            transform: translateY(-2px);
+            opacity: 0.8;
+        }
+
+        .footer .contact-item i {
+            font-size: 14px;
+        }
+
+        .footer .footer-social {
+            text-align: right;
+        }
+
+        .footer .footer-social-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer .footer-social-links {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .footer .footer-social-links a {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .footer .footer-social-links a:hover {
+            background: white;
+            color: var(--macaron-pink);
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
+        }
+
+        .footer .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 13px;
+        }
+
+        @keyframes floatDeco {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        /* 按钮样式 */
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--macaron-pink), #FF8FA3);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(255, 183, 197, 0.4);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(255, 183, 197, 0.5);
+        }
+
+        .action-btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        /* 视频区域样式 */
+        .detail-video-section {
+            margin-bottom: 80px;
+            animation: fadeInUp 0.8s ease 0.5s both;
+        }
+
+        .video-container {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, var(--macaron-pink), var(--macaron-peach));
+            box-shadow: 0 15px 50px rgba(255, 183, 197, 0.3);
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-section-title {
+            font-size: 28px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #FF6B8A, #FFB7C5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .video-section-title::before {
+            content: '';
+            width: 4px;
+            height: 28px;
+            background: linear-gradient(180deg, var(--macaron-pink), var(--macaron-peach));
+            border-radius: 2px;
+        }
+
+        /* 渐入动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .detail-project-title {
+                font-size: 28px;
+            }
+
+            .cover-title {
+                font-size: 22px;
+            }
+
+            .detail-concept-section {
+                padding: 24px;
+            }
+
+            .characters-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .back-btn {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 波点背景 -->
+    <div class="polka-dot-bg"></div>
+
+    <!-- 装饰元素 -->
+    <div class="floating-decoration deco-1">🍩</div>
+    <div class="floating-decoration deco-2">🧁</div>
+    <div class="floating-decoration deco-3">🍰</div>
+    <div class="floating-decoration deco-4">🍪</div>
+
+    <!-- 导航栏 -->
+    <header class="navbar">
+        <nav class="nav-container">
+            <a href="index.html" class="logo" aria-label="Yeuni">
+                <span class="logo-text">Yeuni</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#home">首页</a></li>
+                <li><a href="index.html#projects">项目</a></li>
+                <li><a href="index.html#about">关于</a></li>
+                <li><a href="index.html#contact">联系</a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- 详情页面内容 -->
+    <main class="detail-page">
+        <div class="container">
+            <!-- 头部信息 -->
+            <div class="detail-header">
+                <a href="index.html#projects" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>返回项目列表</span>
+                </a>
+                <h1 class="detail-project-title">酥芙芙契茶屋</h1>
+                <div class="detail-meta-tags">
+                    <span class="detail-meta-tag">原创IP</span>
+                    <span class="detail-meta-tag">手绘</span>
+                    <span class="detail-meta-tag">展陈空间设计</span>
+                </div>
+            </div>
+
+            <!-- 封面区域 -->
+            <section class="detail-cover-section">
+                <div class="detail-cover">
+                    <img src="作品集png/04-IP设计/Sofufu/1.png" alt="酥芙芙契茶屋封面">
+                    <div class="cover-overlay">
+                        <h2 class="cover-title">✨ 魔法契茶屋 ✨</h2>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 视频区域 -->
+            <section class="detail-video-section">
+                <h3 class="video-section-title">项目视频</h3>
+                <div class="video-container">
+                    <video controls playsinline>
+                        <source src="sp/sofufu.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </section>
+
+            <!-- 角色展示区域 -->
+            <section class="characters-section">
+                <div class="section-title-wrapper">
+                    <h3 class="section-title">魔法店员</h3>
+                </div>
+                <div class="characters-grid">
+                    <div class="character-card">
+                        <div class="character-icon">🦊</div>
+                        <h4 class="character-name">福克斯</h4>
+                        <p class="character-role">狐狸店长</p>
+                        <p class="character-desc">睿智优雅的店长，擅长调配各种魔法茶饮，拥有丰富的甜品制作经验。</p>
+                    </div>
+                    <div class="character-card">
+                        <div class="character-icon">🧸</div>
+                        <h4 class="character-name">小栗贝儿</h4>
+                        <p class="character-role">小熊店员</p>
+                        <p class="character-desc">可爱活泼的店员，负责接待客人和包装甜品，笑容温暖治愈。</p>
+                    </div>
+                    <div class="character-card">
+                        <div class="character-icon">🐑</div>
+                        <h4 class="character-name">克尔顿</h4>
+                        <p class="character-role">小羊店员</p>
+                        <p class="character-desc">细心认真的店员，负责甜品装饰和摆盘设计，审美品味出众。</p>
+                    </div>
+                    <div class="character-card">
+                        <div class="character-icon">🐰</div>
+                        <h4 class="character-name">瑞比特</h4>
+                        <p class="character-role">小兔店员</p>
+                        <p class="character-desc">机灵可爱的店员，负责创意研发新甜品，充满奇思妙想。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 概念说明区域 -->
+            <section class="detail-concept-section">
+                <div class="section-title-wrapper">
+                    <h3 class="section-title">品牌故事</h3>
+                </div>
+                <div class="concept-content">
+                    <p>"酥芙芙契茶屋"是为快闪店空间设计的原创IP形象项目，时间范围为2024年9月至2025年1月。</p>
+                    
+                    <h4>故事背景</h4>
+                    <p>由四位魔法师角色共同搭建的魔法契茶屋：狐狸店长福克斯、店员小熊小栗贝儿、小羊克尔顿、小兔瑞比特。他们通过制作魔法甜品来满足人们对美好生活的需求。</p>
+                    
+                    <h4>设计理念</h4>
+                    <p>整体设计采用温暖柔和的马卡龙色调，融合手绘风格，营造出梦幻般的童话氛围。每个角色都有独特的个性和技能，共同打造一个充满魔法与美好的甜品世界。</p>
+                    
+                    <h4>应用场景</h4>
+                    <p>该IP形象可应用于快闪店空间设计、周边产品开发、宣传物料制作等多个场景，为品牌注入活力与创意。无论是线下体验还是线上传播，都能传递出甜美温馨的品牌调性。</p>
+                </div>
+            </section>
+
+            <!-- CTA区域 -->
+            <section style="text-align: center; margin-top: 60px; animation: fadeInUp 0.8s ease 1s both;">
+                <button class="action-btn">
+                    <i class="fas fa-heart"></i>
+                    <span>探索更多魔法甜品</span>
+                </button>
+            </section>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-logo">Yeuni</span>
+                    <p class="footer-description">Creative Digital Experience</p>
+                </div>
+                <div class="footer-contact">
+                    <div class="footer-contact-title">Contact</div>
+                    <div class="contact-list">
+                        <a href="mailto:1186862543@qq.com" class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>1186862543@qq.com</span>
+                        </a>
+                        <a href="tel:+8615015179179" class="contact-item">
+                            <i class="fab fa-phone"></i>
+                            <span>15015179179</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-social">
+                    <div class="footer-social-title">Social</div>
+                    <div class="footer-social-links">
+                        <a href="#" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" aria-label="Behance">
+                            <i class="fab fa-behance"></i>
+                        </a>
+                        <a href="#" aria-label="Dribbble">
+                            <i class="fab fa-dribbble"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Yeuni. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 导航栏滚动效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.querySelector('.navbar');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // 滚动渐入效果
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // 观察所有需要渐入的元素
+            document.querySelectorAll('.detail-cover-section, .characters-section, .detail-concept-section').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+
+            // 角色卡片悬停效果增强
+            const characterCards = document.querySelectorAll('.character-card');
+            characterCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+
+            // 按钮点击涟漪效果
+            const buttons = document.querySelectorAll('.action-btn, .back-btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    ripple.classList.add('ripple');
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
