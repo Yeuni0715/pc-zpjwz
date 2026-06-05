@@ -561,6 +561,85 @@
             border-radius: 2px;
         }
 
+        /* 图集区域样式 */
+        .detail-gallery-section {
+            margin-bottom: 80px;
+            animation: fadeInUp 0.8s ease 0.7s both;
+        }
+
+        .gallery-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+            background: white;
+            box-shadow: 0 15px 50px rgba(255, 183, 197, 0.2);
+        }
+
+        .gallery-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-slide {
+            flex: 0 0 100%;
+            width: 100%;
+        }
+
+        .gallery-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .gallery-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .gallery-arrow {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--macaron-pink);
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--macaron-pink);
+            font-size: 18px;
+        }
+
+        .gallery-arrow:hover {
+            background: var(--macaron-pink);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .gallery-indicators {
+            display: flex;
+            gap: 8px;
+        }
+
+        .gallery-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            border: 2px solid var(--macaron-pink);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-dot.active,
+        .gallery-dot:hover {
+            background: var(--macaron-pink);
+        }
+
         /* 渐入动画 */
         @keyframes fadeInUp {
             from {
@@ -663,6 +742,48 @@
                 </div>
             </section>
 
+            <!-- 项目图集区域 -->
+            <section class="detail-gallery-section">
+                <div class="section-header">
+                    <h3 class="section-title">项目图集</h3>
+                    <p class="video-subtitle">滑动查看更多图片</p>
+                </div>
+                <div class="gallery-container" id="gallery-container">
+                    <div class="gallery-track" id="gallery-track">
+                        <div class="gallery-slide">
+                            <img src="png/04ip/Sofufu/1.png" alt="酥芙芙图集1">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="png/04ip/Sofufu/2.png" alt="酥芙芙图集2">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="png/04ip/Sofufu/3.png" alt="酥芙芙图集3">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="png/04ip/Sofufu/4.png" alt="酥芙芙图集4">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="png/04ip/Sofufu/5.png" alt="酥芙芙图集5">
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-controls">
+                    <button class="gallery-arrow gallery-prev" id="gallery-prev" aria-label="上一张">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="gallery-indicators" id="gallery-indicators">
+                        <button class="gallery-dot active" data-index="0"></button>
+                        <button class="gallery-dot" data-index="1"></button>
+                        <button class="gallery-dot" data-index="2"></button>
+                        <button class="gallery-dot" data-index="3"></button>
+                        <button class="gallery-dot" data-index="4"></button>
+                    </div>
+                    <button class="gallery-arrow gallery-next" id="gallery-next" aria-label="下一张">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </section>
+
             <!-- 角色展示区域 -->
             <section class="characters-section">
                 <div class="section-title-wrapper">
@@ -729,10 +850,6 @@
     <footer id="contact" class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-brand">
-                    <span class="footer-logo">Yeuni</span>
-                    <p class="footer-description">Creative Digital Experience</p>
-                </div>
                 <div class="footer-contact">
                     <div class="footer-contact-title">Contact</div>
                     <div class="contact-list">
@@ -743,23 +860,6 @@
                         <a href="tel:+8615015179179" class="contact-item">
                             <i class="fab fa-phone"></i>
                             <span>15015179179</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="footer-social">
-                    <div class="footer-social-title">Social</div>
-                    <div class="footer-social-links">
-                        <a href="#" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="#" aria-label="Behance">
-                            <i class="fab fa-behance"></i>
-                        </a>
-                        <a href="#" aria-label="Dribbble">
-                            <i class="fab fa-dribbble"></i>
                         </a>
                     </div>
                 </div>
@@ -811,6 +911,67 @@
             characterCards.forEach((card, index) => {
                 card.style.animationDelay = `${index * 0.1}s`;
             });
+
+            // 图集滑动功能
+            const galleryTrack = document.getElementById('gallery-track');
+            const galleryIndicators = document.getElementById('gallery-indicators');
+            const prevBtn = document.getElementById('gallery-prev');
+            const nextBtn = document.getElementById('gallery-next');
+            const slides = document.querySelectorAll('.gallery-slide');
+            
+            if (galleryTrack && slides.length > 0) {
+                let currentIndex = 0;
+                const slideWidth = slides[0].offsetWidth;
+
+                function goToSlide(index) {
+                    if (index < 0) index = slides.length - 1;
+                    if (index >= slides.length) index = 0;
+                    
+                    currentIndex = index;
+                    const offset = -currentIndex * slideWidth;
+                    galleryTrack.style.transform = `translateX(${offset}px)`;
+
+                    // 更新指示器
+                    document.querySelectorAll('.gallery-dot').forEach((dot, i) => {
+                        dot.classList.toggle('active', i === currentIndex);
+                    });
+                }
+
+                // 上一张
+                prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+
+                // 下一张
+                nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+
+                // 点击指示器跳转
+                galleryIndicators.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('gallery-dot')) {
+                        const index = parseInt(e.target.getAttribute('data-index'));
+                        goToSlide(index);
+                    }
+                });
+
+                // 触摸滑动支持
+                let touchStartX = 0;
+                let touchEndX = 0;
+                
+                galleryTrack.addEventListener('touchstart', (e) => {
+                    touchStartX = e.touches[0].clientX;
+                });
+                
+                galleryTrack.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].clientX;
+                    const diff = touchStartX - touchEndX;
+                    
+                    if (Math.abs(diff) > 50) {
+                        if (diff > 0) {
+                            goToSlide(currentIndex + 1);
+                        } else {
+                            goToSlide(currentIndex - 1);
+                        }
+                    }
+                });
+            }
 
             // 按钮点击涟漪效果
             const buttons = document.querySelectorAll('.action-btn, .back-btn');
