@@ -929,31 +929,55 @@ footer {
 }
 
 .footer-content {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 60px;
     margin-bottom: 32px;
 }
 
-.footer-brand {
-    text-align: left;
-}
-
-.footer-logo {
-    font-size: 20px;
-    font-weight: 600;
-    color: #ffffff;
-    display: block;
-    margin-bottom: 8px;
-}
-
-.footer-description {
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.7);
+.footer-nav {
+    flex: 1;
 }
 
 .footer-contact {
-    text-align: center;
+    flex: 1;
+}
+
+.footer-nav-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+}
+
+.footer-nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-nav-links li {
+    margin: 0;
+}
+
+.footer-nav-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 13px;
+    transition: opacity var(--transition-fast);
+}
+
+.footer-nav-links a:hover {
+    opacity: 0.7;
+}
+
+.footer-contact {
+    text-align: left;
 }
 
 .footer-contact-title {
@@ -974,7 +998,7 @@ footer {
 .contact-item {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 8px;
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
