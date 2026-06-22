@@ -32,6 +32,12 @@
     <!-- 首屏区域 -->
     <section id="home" class="hero">
         <div class="hero-content">
+            <div class="hero-text">
+                <span class="hero-resume">RESUME</span>
+                <h1 class="hero-title">PORTFOLIO</h1>
+                <p class="hero-subtitle">个人简历/作品集</p>
+                <p class="hero-year">2023—2026</p>
+            </div>
             <div class="scroll-indicator">
                 <i class="fas fa-chevron-down"></i>
             </div>
@@ -125,6 +131,9 @@
                             </div>
                             <p class="experience-role">小组公众号推文的视觉设计，排版设计，2023届军训时期公众号推文设计</p>
                         </div>
+                        
+                        <div class="experience-divider"></div>
+                        
                         <div class="experience-item">
                             <div class="experience-header">
                                 <h4>海报设计十大歌手宣传组</h4>
@@ -152,7 +161,7 @@
                             <i class="fas fa-magic"></i>
                         </div>
                         <span class="skill-name">AIGC软件</span>
-                        <p class="skill-desc">可灵、即梦Midjourney、Deepseek、Trae CN等</p>
+                        <p class="skill-desc">可灵、即梦Midjourney、Deepseek、Trae CN等，熟练使用AIGC制作图片、视频、表情包、网页</p>
                     </div>
                     <div class="skill-item">
                         <div class="skill-icon">
@@ -185,7 +194,6 @@
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">项目作品</h2>
-                <p class="section-subtitle">探索创意与技术的交汇点</p>
             </div>
             
             <!-- 交互设计分类 -->
@@ -196,309 +204,121 @@
             <!-- 项目1：序数花园 -->
             <article class="project-showcase" data-project="1">
                 <div class="project-layout">
-                    <!-- 左侧：项目信息 -->
-                    <div class="project-info">
-                        <div class="project-cover">
-                            <img src="png/03jh/4.png" alt="序数花园封面" loading="lazy">
-                            <div class="project-number">01</div>
-                        </div>
-                        <div class="project-details">
-                            <h3 class="project-name">序数花园</h3>
-                            <p class="project-concept">植物与斐波那契理论二者的数形结合，中心图形成由数学化、理性化与植物生长美学相融合的交互艺术作品。通过数字媒介探索自然界的数学规律，创造出独特的视觉体验。</p>
-                            <div class="project-award-badge">
-                                <span class="award-text">米兰设计周-中国高校设计学科师生优秀作品展国赛一等奖</span>
-                            </div>
-                            <div class="project-meta-tags">
-                                <span class="meta-tag">交互设计</span>
-                                <span class="meta-tag">斐波那契</span>
-                                <span class="meta-tag">数字艺术</span>
-                                <span class="meta-tag">植物美学</span>
-                            </div>
-                        </div>
+                    <!-- 封面图片 -->
+                    <div class="project-cover">
+                        <img src="png/03jh/4.png" alt="序数花园封面" loading="lazy">
+                        <div class="project-number">01</div>
                     </div>
-                    
-                    <!-- 右侧：图片滑动展示 -->
-                    <div class="project-gallery">
-                        <div class="gallery-container" id="gallery-1">
-                            <div class="gallery-track">
-                                <div class="gallery-slide">
-                                    <img src="png/03jh/4.png" alt="序数花园 - 项目封面">
-                                    <div class="slide-caption">项目封面</div>
-                                </div>
-                                <div class="gallery-slide">
-                                    <img src="png/03jh/5.png" alt="序数花园 - 概念设计">
-                                    <div class="slide-caption">概念设计</div>
-                                </div>
-                                <div class="gallery-slide">
-                                    <img src="png/03jh/6.png" alt="序数花园 - 交互效果">
-                                    <div class="slide-caption">交互效果</div>
-                                </div>
-                                <div class="gallery-slide">
-                                    <img src="png/03jh/7.png" alt="序数花园 - 细节展示">
-                                    <div class="slide-caption">细节展示</div>
-                                </div>
-                                <div class="gallery-slide">
-                                    <img src="png/03jh/8.png" alt="序数花园 - 最终效果">
-                                    <div class="slide-caption">最终效果</div>
-                                </div>
-                            </div>
+                    <!-- 项目信息 -->
+                    <div class="project-info">
+                        <h3 class="project-name">序数花园</h3>
+                        <p class="project-concept">植物与斐波那契理论二者的数形结合，中心图形成由数学化、理性化与植物生长美学相融合的交互艺术作品。通过数字媒介探索自然界的数学规律，创造出独特的视觉体验。</p>
+                        <div class="project-award-badge">
+                            <span class="award-text">米兰设计周</span>
+                            <br>
+                            <span class="award-text">-中国高校设计学科师生优秀作品展国赛一等奖</span>
                         </div>
-                        <div class="gallery-controls">
-                            <div class="gallery-controls-center">
-                                <button class="gallery-btn prev" data-gallery="1" aria-label="上一张">
-                                    <i class="fas fa-chevron-left"></i>
-                                </button>
-                                <div class="gallery-indicator">
-                                    <div class="gallery-counter" data-gallery="1"><span>1</span> / 5</div>
-                                    <div class="gallery-dots" data-gallery="1">
-                                        <span class="dot active"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                    </div>
-                                </div>
-                                <button class="gallery-btn next" data-gallery="1" aria-label="下一张">
-                                    <i class="fas fa-chevron-right"></i>
-                                </button>
-                            </div>
-                            <a href="project-detail.html?id=1" class="view-detail-btn gallery-view-btn">
-                                <span>查看详情</span>
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
+                        <div class="project-meta-tags">
+                            <span class="meta-tag">交互设计</span>
+                            <span class="meta-tag">数字艺术</span>
+                            <span class="meta-tag">植物美学</span>
                         </div>
+                        <a href="project-detail.html?id=1" class="view-detail-btn">
+                            <span>查看详情</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
             </article>
 
-            <!-- UI设计分类 -->
+            <!-- UI 设计分类 -->
             <div class="project-category">
-                <h3 class="category-title">UI设计</h3>
+                <h3 class="category-title">UI 设计</h3>
             </div>
 
-            <!-- 项目3：好梦 -->
+            <!-- 项目 2：好梦 -->
+            <article class="project-showcase" data-project="2">
+                <div class="project-layout">
+                    <!-- 封面图片 -->
+                    <div class="project-cover">
+                        <img src="png/05ui/13.png" alt="好梦封面" loading="lazy">
+                        <div class="project-number">02</div>
+                    </div>
+                    <!-- 项目信息 -->
+                    <div class="project-info">
+                        <h3 class="project-name">好梦</h3>
+                        <p class="project-concept">以梦貘为核心打造完整的情感叙事，让助眠产品拥有故事感与生命力的疗愈系助眠应用。通过温暖的视觉设计和贴心的交互体验，帮助用户获得更好的睡眠质量。</p>
+                        <div class="project-meta-tags">
+                            <span class="meta-tag">UI 设计</span>
+                            <span class="meta-tag">助眠 APP</span>
+                            <span class="meta-tag">情感设计</span>
+                            <span class="meta-tag">梦貘</span>
+                        </div>
+                        <a href="project-detail.html?id=2" class="view-detail-btn">
+                            <span>查看详情</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- IP 设计分类 -->
+            <div class="project-category">
+                <h3 class="category-title">IP 设计</h3>
+            </div>
+
+            <!-- 项目 3：狸塔塔 -->
             <article class="project-showcase" data-project="3">
                 <div class="project-layout">
-                    <!-- 左侧：项目信息 -->
-                    <div class="project-info">
-                        <div class="project-cover">
-                            <img src="png/05ui/13.png" alt="好梦封面" loading="lazy">
-                            <div class="project-number">03</div>
-                        </div>
-                        <div class="project-details">
-                            <h3 class="project-name">好梦</h3>
-                            <p class="project-concept">以梦貘为核心打造完整的情感叙事，让助眠产品拥有故事感与生命力的疗愈系助眠应用。通过温暖的视觉设计和贴心的交互体验，帮助用户获得更好的睡眠质量。</p>
-                            <div class="project-meta-tags">
-                                <span class="meta-tag">UI设计</span>
-                                <span class="meta-tag">助眠APP</span>
-                                <span class="meta-tag">情感设计</span>
-                                <span class="meta-tag">梦貘</span>
-                            </div>
-                        </div>
+                    <!-- 封面图片 -->
+                    <div class="project-cover">
+                        <img src="png/04ip/litata/9.png" alt="狸塔塔封面" loading="lazy">
+                        <div class="project-number">03</div>
                     </div>
-                    
-                    <!-- 右侧：图片滑动展示 -->
-                    <div class="project-gallery">
-                        <div class="gallery-container" id="gallery-3">
-                            <div class="gallery-track">
-                                <div class="gallery-slide">
-                                    <img src="png/05ui/13.png" alt="好梦 - 项目封面">
-                                    <div class="slide-caption">项目封面</div>
-                                </div>
-                                <div class="gallery-slide">
-                                    <img src="png/05ui/14.png" alt="好梦 - 主界面设计">
-                                    <div class="slide-caption">主界面设计</div>
-                                </div>
-                                <div class="gallery-slide">
-                                    <img src="png/05ui/15.png" alt="好梦 - 功能界面">
-                                    <div class="slide-caption">功能界面</div>
-                                </div>
-                                <div class="gallery-slide">
-                                    <img src="png/05ui/16.png" alt="好梦 - 交互流程">
-                                    <div class="slide-caption">交互流程</div>
-                                </div>
-                                <div class="gallery-slide">
-                                    <img src="png/05ui/17.png" alt="好梦 - 品牌设计">
-                                    <div class="slide-caption">品牌设计</div>
-                                </div>
-                            </div>
+                    <!-- 项目信息 -->
+                    <div class="project-info">
+                        <h3 class="project-name">狸塔塔</h3>
+                        <p class="project-concept">深圳技术大学数字人 IP 设计，结合深圳印象和技术工匠精神，设计了名为"狸塔塔"的可爱 IP 形象。融合地域文化特色与现代设计理念，打造具有辨识度的数字形象。</p>
+                        <div class="project-award-badge">
+                            <span class="award-text">入选第二十二届</span>
+                            <br>
+                            <span class="award-text">中国 (深圳) 国际文化产业博览交易会</span>
                         </div>
-                        <div class="gallery-controls">
-                            <div class="gallery-controls-center">
-                                <button class="gallery-btn prev" data-gallery="3" aria-label="上一张">
-                                    <i class="fas fa-chevron-left"></i>
-                                </button>
-                                <div class="gallery-indicator">
-                                    <div class="gallery-counter" data-gallery="3"><span>1</span> / 5</div>
-                                    <div class="gallery-dots" data-gallery="3">
-                                        <span class="dot active"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                    </div>
-                                </div>
-                                <button class="gallery-btn next" data-gallery="3" aria-label="下一张">
-                                    <i class="fas fa-chevron-right"></i>
-                                </button>
-                            </div>
-                            <a href="project-detail.html?id=3" class="view-detail-btn gallery-view-btn">
-                                <span>查看详情</span>
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
+                        <div class="project-meta-tags">
+                            <span class="meta-tag">IP 设计</span>
+                            <span class="meta-tag">数字人</span>
+                            <span class="meta-tag">品牌形象</span>
+                            <span class="meta-tag">深圳</span>
                         </div>
+                        <a href="project-detail.html?id=3" class="view-detail-btn">
+                            <span>查看详情</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
             </article>
 
-            <!-- IP设计分类 -->
-            <div class="project-category">
-                <h3 class="category-title">IP设计</h3>
-            </div>
-
-            <!-- 项目2：狸塔塔 -->
-            <article class="project-showcase reverse" data-project="2">
+            <!-- 项目 4：酥芙芙契茶屋 -->
+            <article class="project-showcase" data-project="4">
                 <div class="project-layout">
-                    <!-- 左侧：项目信息 -->
+                    <!-- 封面图片 -->
+                    <div class="project-cover">
+                        <img src="png/04ip/Sofufu/1.png" alt="酥芙芙契茶屋封面" loading="lazy">
+                        <div class="project-number">04</div>
+                    </div>
+                    <!-- 项目信息 -->
                     <div class="project-info">
-                        <div class="project-cover">
-                            <img src="png/04ip/litata/9.png" alt="狸塔塔封面" loading="lazy">
-                            <div class="project-number">02</div>
+                        <h3 class="project-name">酥芙芙契茶屋</h3>
+                        <p class="project-concept">2024 年 9 月至 2025 年 1 月，为快闪店空间进行原创 IP 形象设计。由四位魔法师角色（狐狸店长福克斯、店员小熊小栗贝儿、小羊克尔顿、小兔瑞比特）共同搭建魔法契茶屋，通过制作魔法甜品来满足人们对美好生活的需求。</p>
+                        <div class="project-meta-tags">
+                            <span class="meta-tag">原创 IP</span>
+                            <span class="meta-tag">手绘</span>
+                            <span class="meta-tag">展陈空间设计</span>
                         </div>
-                        <div class="project-details">
-                            <h3 class="project-name">狸塔塔</h3>
-                            <p class="project-concept">深圳技术大学数字人IP设计，结合深圳印象和技术工匠精神，设计了名为"狸塔塔"的可爱IP形象。融合地域文化特色与现代设计理念，打造具有辨识度的数字形象。</p>
-                            <div class="project-award-badge">
-                                <span class="award-text">入选第二十二届中国(深圳)国际文化产业博览交易会</span>
-                            </div>
-                            <div class="project-meta-tags">
-                                <span class="meta-tag">IP设计</span>
-                                <span class="meta-tag">数字人</span>
-                                <span class="meta-tag">品牌形象</span>
-                                <span class="meta-tag">深圳</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 右侧：图片滑动展示 -->
-                    <div class="project-gallery">
-                        <div class="gallery-container" id="gallery-2">
-                            <div class="gallery-track">
-                                <div class="gallery-slide">
-                                    <img src="png/04ip/litata/9.png" alt="狸塔塔 - 项目封面">
-                                    <div class="slide-caption">项目封面</div>
-                                </div>
-                                <div class="gallery-slide">
-                                    <img src="png/04ip/litata/10.png" alt="狸塔塔 - IP形象设计">
-                                    <div class="slide-caption">IP形象设计</div>
-                                </div>
-                                <div class="gallery-slide">
-                                    <img src="png/04ip/litata/11.png" alt="狸塔塔 - 表情设计">
-                                    <div class="slide-caption">表情设计</div>
-                                </div>
-                                <div class="gallery-slide">
-                                    <img src="png/04ip/litata/12.png" alt="狸塔塔 - 应用场景">
-                                    <div class="slide-caption">应用场景</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="gallery-controls">
-                            <div class="gallery-controls-center">
-                                <button class="gallery-btn prev" data-gallery="2" aria-label="上一张">
-                                    <i class="fas fa-chevron-left"></i>
-                                </button>
-                                <div class="gallery-indicator">
-                                    <div class="gallery-counter" data-gallery="2"><span>1</span> / 4</div>
-                                    <div class="gallery-dots" data-gallery="2">
-                                        <span class="dot active"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                    </div>
-                                </div>
-                                <button class="gallery-btn next" data-gallery="2" aria-label="下一张">
-                                    <i class="fas fa-chevron-right"></i>
-                                </button>
-                            </div>
-                            <a href="project-detail.html?id=2" class="view-detail-btn gallery-view-btn">
-                                <span>查看详情</span>
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- 项目2-2：酥芙芙契茶屋 -->
-            <article class="project-showcase" data-project="5">
-                <div class="project-layout">
-                    <!-- 左侧：项目信息 -->
-                    <div class="project-info">
-                        <div class="project-cover">
-                            <img src="png/04ip/Sofufu/1.png" alt="酥芙芙契茶屋封面" loading="lazy">
-                            <div class="project-number">05</div>
-                        </div>
-                        <div class="project-details">
-                            <h3 class="project-name">酥芙芙契茶屋</h3>
-                            <p class="project-concept">2024年9月至2025年1月，为快闪店空间进行原创IP形象设计。由四位魔法师角色（狐狸店长福克斯、店员小熊小栗贝儿、小羊克尔顿、小兔瑞比特）共同搭建魔法契茶屋，通过制作魔法甜品来满足人们对美好生活的需求。</p>
-                            <div class="project-meta-tags">
-                                <span class="meta-tag">原创IP</span>
-                                <span class="meta-tag">手绘</span>
-                                <span class="meta-tag">展陈空间设计</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- 右侧：图片滑动展示 -->
-                    <div class="project-gallery">
-                        <div class="gallery-container" id="gallery-5">
-                            <div class="gallery-track">
-                                <div class="gallery-slide">
-                                    <img src="png/04ip/Sofufu/1.png" alt="酥芙芙契茶屋 - 项目封面">
-                                    <div class="slide-caption">项目封面</div>
-                                </div>
-                                <div class="gallery-slide">
-                                    <img src="png/04ip/Sofufu/2.png" alt="酥芙芙契茶屋 - IP形象设计">
-                                    <div class="slide-caption">IP形象设计</div>
-                                </div>
-                                <div class="gallery-slide">
-                                    <img src="png/04ip/Sofufu/3.png" alt="酥芙芙契茶屋 - 角色设定">
-                                    <div class="slide-caption">角色设定</div>
-                                </div>
-                                <div class="gallery-slide">
-                                    <img src="png/04ip/Sofufu/4.png" alt="酥芙芙契茶屋 - 展陈设计">
-                                    <div class="slide-caption">展陈设计</div>
-                                </div>
-                                <div class="gallery-slide">
-                                    <img src="png/04ip/Sofufu/5.png" alt="酥芙芙契茶屋 - 应用场景">
-                                    <div class="slide-caption">应用场景</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="gallery-controls">
-                            <div class="gallery-controls-center">
-                                <button class="gallery-btn prev" data-gallery="5" aria-label="上一张">
-                                    <i class="fas fa-chevron-left"></i>
-                                </button>
-                                <div class="gallery-indicator">
-                                    <div class="gallery-counter" data-gallery="5"><span>1</span> / 5</div>
-                                    <div class="gallery-dots" data-gallery="5">
-                                        <span class="dot active"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                    </div>
-                                </div>
-                                <button class="gallery-btn next" data-gallery="5" aria-label="下一张">
-                                    <i class="fas fa-chevron-right"></i>
-                                </button>
-                            </div>
-                            <a href="project-detail-sofufu.html" class="view-detail-btn gallery-view-btn">
-                                <span>查看详情</span>
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
+                        <a href="project-detail-sofufu.html" class="view-detail-btn">
+                            <span>查看详情</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
             </article>
@@ -508,72 +328,27 @@
                 <h3 class="category-title">装置设计</h3>
             </div>
 
-            <!-- 项目4：蜷白 -->
-            <article class="project-showcase reverse" data-project="4">
+            <!-- 项目 5：蜷白 -->
+            <article class="project-showcase" data-project="5">
                 <div class="project-layout">
-                    <!-- 左侧：项目信息 -->
-                    <div class="project-info">
-                        <div class="project-cover">
-                            <img src="png/06zz/1.png" alt="蜷白封面" loading="lazy">
-                            <div class="project-number">04</div>
-                        </div>
-                        <div class="project-details">
-                            <h3 class="project-name">蜷白</h3>
-                            <p class="project-concept">装置以含羞草的应激闭合特性为核心隐喻，结合黑白圣母的意象，将植物的'触之即敛'化为人类情绪的可视化表达。当外界产生触碰与压力时，可交互装置模拟植物叶片的收缩行为，使穿戴者从开放状态逐渐进入内放与防御状态，呈现出一种情绪被'看见'的过程。</p>
-                            <div class="project-meta-tags">
-                                <span class="meta-tag">可穿戴装置</span>
-                                <span class="meta-tag">交互艺术</span>
-                                <span class="meta-tag">情绪可视化</span>
-                                <span class="meta-tag">含羞草</span>
-                            </div>
-                        </div>
+                    <!-- 封面图片 -->
+                    <div class="project-cover">
+                        <img src="png/06zz/1.png" alt="蜷白封面" loading="lazy">
+                        <div class="project-number">05</div>
                     </div>
-                    
-                    <!-- 右侧：图片滑动展示 -->
-                    <div class="project-gallery">
-                        <div class="gallery-container" id="gallery-4">
-                            <div class="gallery-track">
-                                <div class="gallery-slide">
-                                    <img src="png/06zz/1.png" alt="蜷白 - 项目封面">
-                                    <div class="slide-caption">项目封面</div>
-                                </div>
-                                <div class="gallery-slide">
-                                    <img src="png/06zz/2.png" alt="蜷白 - 概念设计">
-                                    <div class="slide-caption">概念设计</div>
-                                </div>
-                                <div class="gallery-slide">
-                                    <img src="png/06zz/3.png" alt="蜷白 - 装置细节">
-                                    <div class="slide-caption">装置细节</div>
-                                </div>
-                                <div class="gallery-slide">
-                                    <img src="png/06zz/4.png" alt="蜷白 - 最终效果">
-                                    <div class="slide-caption">最终效果</div>
-                                </div>
-                            </div>
+                    <!-- 项目信息 -->
+                    <div class="project-info">
+                        <h3 class="project-name">蜷白</h3>
+                        <p class="project-concept">装置以含羞草的应激闭合特性为核心隐喻，结合黑白圣母的意象，将植物的'触之即敛'化为人类情绪的可视化表达。当外界产生触碰与压力时，可交互装置模拟植物叶片的收缩行为，使穿戴者从开放状态逐渐进入内放与防御状态，呈现出一种情绪被'看见'的过程。</p>
+                        <div class="project-meta-tags">
+                            <span class="meta-tag">可穿戴装置</span>
+                            <span class="meta-tag">交互艺术</span>
+                            <span class="meta-tag">情绪可视化</span>
                         </div>
-                        <div class="gallery-controls">
-                            <div class="gallery-controls-center">
-                                <button class="gallery-btn prev" data-gallery="4" aria-label="上一张">
-                                    <i class="fas fa-chevron-left"></i>
-                                </button>
-                                <div class="gallery-indicator">
-                                    <div class="gallery-counter" data-gallery="4"><span>1</span> / 4</div>
-                                    <div class="gallery-dots" data-gallery="4">
-                                        <span class="dot active"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                        <span class="dot"></span>
-                                    </div>
-                                </div>
-                                <button class="gallery-btn next" data-gallery="4" aria-label="下一张">
-                                    <i class="fas fa-chevron-right"></i>
-                                </button>
-                            </div>
-                            <a href="project-detail.html?id=4" class="view-detail-btn gallery-view-btn">
-                                <span>查看详情</span>
-                                <i class="fas fa-arrow-right"></i>
-                            </a>
-                        </div>
+                        <a href="project-detail.html?id=5" class="view-detail-btn">
+                            <span>查看详情</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
             </article>
@@ -584,15 +359,6 @@
     <footer id="contact" class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-nav">
-                    <div class="footer-nav-title">Navigation</div>
-                    <ul class="footer-nav-links">
-                        <li><a href="#about">关于 Yeuni</a></li>
-                        <li><a href="#skills">技能特长</a></li>
-                        <li><a href="#projects">项目作品</a></li>
-                        <li><a href="#contact">联系方式</a></li>
-                    </ul>
-                </div>
                 <div class="footer-contact">
                     <div class="footer-contact-title">Contact</div>
                     <div class="contact-list">
@@ -604,10 +370,6 @@
                             <i class="fas fa-phone"></i>
                             <span>15015179179</span>
                         </a>
-                        <div class="contact-item">
-                            <i class="fab fa-weixin"></i>
-                            <span>yyy1186862543</span>
-                        </div>
                     </div>
                 </div>
             </div>
