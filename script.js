@@ -120,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
     new ProjectGallery(3);
     new ProjectGallery(4);
     new ProjectGallery(5);
+    new ImageViewer();
     
     const projectShowcases = document.querySelectorAll('.project-showcase');
     
@@ -150,3 +151,96 @@ document.querySelectorAll('.gallery-container').forEach(container => {
 document.querySelectorAll('.gallery-slide img').forEach(img => {
     img.addEventListener('dragstart', (e) => e.preventDefault());
 });
+
+// 图片查看器功能
+class ImageViewer {
+    constructor() {
+        this.viewer = document.getElementById('image-viewer');
+        this.overlay = document.getElementById('image-viewer-overlay');
+        this.closeBtn = document.getElementById('image-viewer-close');
+        this.prevBtn = document.getElementById('image-viewer-prev');
+        this.nextBtn = document.getElementById('image-viewer-next');
+        this.image = document.getElementById('image-viewer-image');
+        this.caption = document.getElementById('image-viewer-caption');
+        
+        this.currentImages = [];
+        this.currentIndex = 0;
+        
+        this.init();
+    }
+    
+    init() {
+        this.closeBtn.addEventListener('click', () => this.close());
+        this.overlay.addEventListener('click', () => this.close());
+        this.prevBtn.addEventListener('click', () => this.prev());
+        this.nextBtn.addEventListener('click', () => this.next());
+        
+        document.addEventListener('keydown', (e) => this.handleKeyDown(e));
+        
+        this.setupGalleryImages();
+    }
+    
+    setupGalleryImages() {
+        const allImages = document.querySelectorAll('.gallery-slide img');
+        allImages.forEach((img, index) => {
+            img.style.cursor = 'zoom-in';
+            img.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const galleryId = img.closest('.gallery-container').id.replace('gallery-', '');
+                this.open(galleryId, index);
+            });
+        });
+    }
+    
+    open(galleryId, index) {
+        const gallery = document.getElementById(`gallery-${galleryId}`);
+        if (!gallery) return;
+        
+        this.currentImages = Array.from(gallery.querySelectorAll('.gallery-slide img'));
+        this.currentIndex = index;
+        
+        this.updateImage();
+        this.viewer.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    close() {
+        this.viewer.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    prev() {
+        if (this.currentImages.length === 0) return;
+        this.currentIndex = (this.currentIndex - 1 + this.currentImages.length) % this.currentImages.length;
+        this.updateImage();
+    }
+    
+    next() {
+        if (this.currentImages.length === 0) return;
+        this.currentIndex = (this.currentIndex + 1) % this.currentImages.length;
+        this.updateImage();
+    }
+    
+    updateImage() {
+        const img = this.currentImages[this.currentIndex];
+        this.image.src = img.src;
+        this.image.alt = img.alt;
+        
+        const caption = img.nextElementSibling;
+        this.caption.textContent = caption ? caption.textContent : '';
+    }
+    
+    handleKeyDown(e) {
+        if (!this.viewer.classList.contains('active')) return;
+        
+        if (e.key === 'Escape') {
+            this.close();
+        } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            this.prev();
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            this.next();
+        }
+    }
+}
